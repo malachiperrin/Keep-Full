@@ -11,9 +11,11 @@ import (
 type Product struct {
 	ProductID           int
 	ProductName         string
-	ProductDependencies []sql.Null[string]
-	VendorID            int
+	ProductDependencies sql.Null[string]
+	VendorID            sql.Null[int]
 }
+
+var ProductsList []Product
 
 func FetchAllProducts() {
 	rows, err := db.DB.Query("SELECT * FROM Products")
@@ -26,12 +28,18 @@ func FetchAllProducts() {
 		var id int
 		var name string
 		var dependencies sql.Null[string]
-		var vendor int
+		var vendor sql.Null[int]
 		err := rows.Scan(&id, &name, &dependencies, &vendor)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(id, name)
+		p := Product{}
+		p.ProductID = id
+		p.ProductName = name
+		p.ProductDependencies = dependencies
+		p.VendorID = vendor
+
+		ProductsList = append(ProductsList, p)
 	}
 
 	if err := rows.Err(); err != nil {
@@ -90,11 +98,11 @@ func FetchProductByID(id int) (*Product, error) {
 	var val int
 	var val2 string
 	var val3 sql.Null[string]
-	var val4 int
+	var val4 sql.Null[int]
 	r.Scan(&val, &val2, &val3)
 	p.ProductID = val
 	p.ProductName = val2
-	p.ProductDependencies = append(p.ProductDependencies, val3)
+	p.ProductDependencies = val3
 	p.VendorID = val4
 	return p, nil
 

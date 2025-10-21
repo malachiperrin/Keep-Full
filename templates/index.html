@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inventory API Reference</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 2rem;
+                background-color: #f9f9f9;
+                color: #333;
+            }
+            h1,
+            h2 {
+                color: #2c3e50;
+            }
+            code {
+                background-color: #eef;
+                padding: 2px 4px;
+                border-radius: 4px;
+            }
+            .endpoint {
+                margin-bottom: 1.5rem;
+            }
+            .type-def {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                padding: 1rem;
+                border-radius: 6px;
+                margin-bottom: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>🍽️ Inventory Management API</h1>
+        <p>
+            This API powers the inventory system for deli and quick food spots.
+            Below are the available endpoints and data structures.
+        </p>
+
+        <h2>📦 Product Endpoints</h2>
+        <div class="endpoint">
+            <h3>GET /products</h3>
+            <p>Fetches all products in the inventory.</p>
+            <p>
+                <strong>Returns:</strong> Array of <code>Product</code> objects.
+            </p>
+        </div>
+
+        <div class="endpoint">
+            <h3>GET /products/{id}</h3>
+            <p>Fetches a single product by its ID.</p>
+            <p><strong>Returns:</strong> A <code>Product</code> object.</p>
+        </div>
+
+        <h2>🏪 Vendor Endpoints</h2>
+        <div class="endpoint">
+            <h3>GET /vendors</h3>
+            <p>Fetches all vendors supplying products.</p>
+            <p>
+                <strong>Returns:</strong> Array of <code>Vendor</code> objects.
+            </p>
+        </div>
+
+        <h2>🧬 Data Types</h2>
+
+        <div class="type-def">
+            <h3>Product</h3>
+            <ul>
+                <li>
+                    <code>ProductID</code>: <em>int</em> – Unique identifier
+                </li>
+                <li>
+                    <code>ProductName</code>: <em>string</em> – Name of the
+                    product
+                </li>
+                <li>
+                    <code>ProductDependencies</code>:
+                    <em>[]string (nullable)</em> – Optional dependencies
+                </li>
+                <li><code>VendorID</code>: <em>int</em> – Linked vendor ID</li>
+            </ul>
+        </div>
+
+        <div class="type-def">
+            <h3>Vendor</h3>
+            <ul>
+                <li><code>VendorID</code>: <em>int</em> – Unique identifier</li>
+                <li>
+                    <code>VendorName</code>: <em>string</em> – Name of the
+                    vendor
+                </li>
+                <li>
+                    <code>VendorContact</code>: <em>string</em> – Contact
+                    information
+                </li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Built with ❤️ in Go. Last updated: October 2025</p>
+        </footer>
+    </body>
+</html>

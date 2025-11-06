@@ -56,5 +56,11 @@ func main() {
 		}
 	})
 
+	http.HandleFunc("/seed", func(w http.ResponseWriter, r *http.Request) {
+		io.WriteString(w, "Seed Route...")
+		seeder := db.ProductsSeeder{Table: "products"}
+		seeder.Seed()
+	})
+
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
